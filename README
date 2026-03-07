@@ -1,0 +1,42 @@
+1. Project Description: What your site does and who it is for
+This is an app that allows users to create and track personal workouts and optionally have a coach who can create and manage workout plans for them. 
+
+2. Database Schema: An image of your entity relation diagram (ERD) exported from
+pgAdmin showing your tables and relationships
+
+
+3. User Roles: Explanation of each role and what they can do
+There are thre roles: Admin, Coach, and Standard User
+
+
+Trainee Can:
+Create personal workouts
+Edit/delete their workouts
+Log workouts
+Submit plan requests to Coach
+View request status
+
+Coach Can:
+View workout plan requests from trainees
+Create workouts for trainees
+Edit workouts they created
+Delete workouts they created
+Add coaching notes to plan requests
+View trainee workout progress
+Update request status
+Assign trainees to themselves
+Remove coach–trainee assignments
+
+Admin Can: 
+Full system control
+Manage users and roles
+Delete any workout
+View all workout logs
+Manage plan requests
+
+
+4. Test Account Credentials: Username or email for one account of each role type
+
+
+
+5. Known Limitations: Any features you did not complete or bugs you are aware of
