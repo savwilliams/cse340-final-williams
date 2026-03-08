@@ -8,7 +8,6 @@ pgAdmin showing your tables and relationships
 3. User Roles: Explanation of each role and what they can do
 There are thre roles: Admin, Coach, and Standard User
 
-
 Trainee Can:
 Create personal workouts
 Edit/delete their workouts
@@ -29,14 +28,18 @@ Remove coach–trainee assignments
 
 Admin Can: 
 Full system control
-Manage users and roles
+Manage users and roles (promote trainee to coach)
 Delete any workout
 View all workout logs
 Manage plan requests
 
 
 4. Test Account Credentials: Username or email for one account of each role type
-
+Trainee: trainee@gmail.com
+Coach: coach@gmail.com
+Admin: admin@gmail.com
 
 
 5. Known Limitations: Any features you did not complete or bugs you are aware of
+
+
