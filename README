@@ -1,8 +1,7 @@
 1. Project Description: What your site does and who it is for
 This is an app that allows users to create and track personal workouts and optionally have a coach who can create and manage workout plans for them. 
 
-2. Database Schema: An image of your entity relation diagram (ERD) exported from
-pgAdmin showing your tables and relationships
+2. Database Schema: An image of your entity relation diagram (ERD) exported from pgAdmin showing your tables and relationships
 
 
 3. User Roles: Explanation of each role and what they can do
@@ -43,3 +42,119 @@ Admin: admin@gmail.com
 5. Known Limitations: Any features you did not complete or bugs you are aware of
 
 
+================================
+Notes for self : Project Roadmap 
+
+* Completed steps have '-' at beginning *
+
+Phase 1 — Finalize the System Design
+Goal: Be completely clear about what the app does before writing code.
+Tasks in this phase:
+-Confirm the user roles
+-Confirm the features each role has
+-Decide what core entities exist (users, workouts, logs, requests, etc.)
+
+
+
+Phase 2 — Database Design 
+Goal: Plan the database structure before writing any SQL or code.
+Tasks:
+-List the tables you need.
+-Decide the columns for each table.
+-define primary keys
+-define foreign keys
+-determine relationships.
+Create the ERD diagram in pgAdmin.
+
+
+Phase 3 — Project Setup
+Tasks:
+initialize Node project
+install Express
+install EJS
+configure ESM
+create/update folder structure (MVC)
+start the server
+test that a page renders
+
+
+Phase 4 — PostgreSQL Connection
+Connect the app to database.
+Tasks:
+install pg
+create connection pool
+test a query
+verify database communication
+
+
+Phase 5 — Authentication System
+Tasks:
+register route
+login route
+password hashing with bcrypt
+session management with express-session
+logout route
+
+
+Phase 6 — Authorization (Roles)
+After authentication works, add role protection.
+Tasks:
+middleware for isAuthenticated
+middleware for isCoach
+middleware for isAdmin
+protect routes
+
+
+Phase 7 — Core Feature: Workouts
+Now implement the main content system.
+Tasks:
+create workout
+edit workout
+delete workout
+view workouts
+
+
+Phase 8 — Workout Logging
+Add the progress tracking feature.
+Tasks:
+log workout
+edit log
+delete log
+view logs
+
+
+Phase 9 — Workflow System
+Implement the required multi-stage workflow.
+Tasks:
+submit workout plan request
+coach views requests
+coach updates request status
+coach adds notes
+
+
+Phase 10 — Admin Dashboard
+Now implement admin control.
+Tasks:
+manage users
+change user roles
+view all workouts
+delete inappropriate workouts
+
+
+Phase 11 — Validation and Security
+Now improve robustness.
+Tasks:
+validate form inputs
+sanitize input
+parameterized SQL queries
+error handling middleware
+
+
+Phase 12 — Deployment
+Final step.
+Tasks:
+push project to GitHub
+deploy to Render
+connect PostgreSQL database
+configure environment variables
+====================================
