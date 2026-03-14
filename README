@@ -48,8 +48,7 @@ Notes for self : Project Roadmap
 * Completed steps have '-' at beginning *
 
 Phase 1 — Finalize the System Design
-Goal: Be completely clear about what the app does before writing code.
-Tasks in this phase:
+Tasks:
 -Confirm the user roles
 -Confirm the features each role has
 -Decide what core entities exist (users, workouts, logs, requests, etc.)
@@ -57,7 +56,6 @@ Tasks in this phase:
 
 
 Phase 2 — Database Design 
-Goal: Plan the database structure before writing any SQL or code.
 Tasks:
 -List the tables you need.
 -Decide the columns for each table.
@@ -69,22 +67,22 @@ Create the ERD diagram in pgAdmin.
 
 Phase 3 — Project Setup
 Tasks:
-initialize Node project
-install Express
-install EJS
-configure ESM
-create/update folder structure (MVC)
-start the server
-test that a page renders
+-initialize Node project
+-install Express
+-install EJS
+-configure ESM
+-create/update folder structure (MVC)
+-start the server
+-test that a page renders
 
 
 Phase 4 — PostgreSQL Connection
 Connect the app to database.
 Tasks:
-install pg
-create connection pool
-test a query
-verify database communication
+-install pg
+-create connection pool
+-test a query
+-verify database connection
 
 
 Phase 5 — Authentication System
@@ -106,7 +104,7 @@ protect routes
 
 
 Phase 7 — Core Feature: Workouts
-Now implement the main content system.
+Implement the main content system.
 Tasks:
 create workout
 edit workout
@@ -133,7 +131,7 @@ coach adds notes
 
 
 Phase 10 — Admin Dashboard
-Now implement admin control.
+Implement admin control.
 Tasks:
 manage users
 change user roles
@@ -142,7 +140,7 @@ delete inappropriate workouts
 
 
 Phase 11 — Validation and Security
-Now improve robustness.
+Improve robustness.
 Tasks:
 validate form inputs
 sanitize input
@@ -151,7 +149,7 @@ error handling middleware
 
 
 Phase 12 — Deployment
-Final step.
+Final step!
 Tasks:
 push project to GitHub
 deploy to Render

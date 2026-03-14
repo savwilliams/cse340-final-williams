@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon --env-file=.env server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,7 +14,9 @@
   "license": "ISC",
   "packageManager": "pnpm@10.30.2+sha256.56121a083f0044fe06951ec2470978303f396ac62c549d68eb449c9467dfa0cf",
   "dependencies": {
-    "express": "^5.2.1"
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
