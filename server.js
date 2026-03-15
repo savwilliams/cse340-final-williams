@@ -21,15 +21,18 @@ const app = express();
 /**
  * Configure Express
  */
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
-
 
 /**
  * Routes
  */
 app.get('/', (req, res) => {
-  res.render('home', { title: 'Workout Tracker' });
+  res.render('home', {
+    title: 'Workout Tracker',
+    bodyClass: 'home-page'
+  });
 });
 
 

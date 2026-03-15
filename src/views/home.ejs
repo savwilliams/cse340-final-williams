@@ -1,12 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-</head>
-<body>
-  <h1><%= title %></h1>
-  <p>Page under construction, new content coming soon!</p>
-</body>
-</html>
+<%- include('partials/header') %>
+
+<main>
+  <!-- View 1: Hero -->
+  <section class="hero">
+    <div class="hero-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <!-- Dumbbell: left weight, bar, right weight -->
+        <rect x="2" y="8" width="5" height="8" rx="1" fill="currentColor"/>
+        <rect x="9" y="11" width="6" height="2" fill="currentColor"/>
+        <rect x="17" y="8" width="5" height="8" rx="1" fill="currentColor"/>
+      </svg>
+    </div>
+    <h1>Elevate Your Fitness Journey</h1>
+    <p class="hero-description">A comprehensive platform for trainees and coaches to create, track, and manage personalized workout plans with confidence.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Get Started</a>
+      <a href="#built-for-everyone" class="btn-secondary">Learn More</a>
+    </div>
+  </section>
+
+  <!-- View 2: Built for Everyone -->
+  <section class="section-built" id="built-for-everyone">
+    <h2>Built for Everyone</h2>
+    <p class="subheading">Two powerful roles, one seamless experience</p>
+    <div class="cards">
+      <div class="card trainee">
+        <div class="card-icon trainee"></div>
+        <h3>Trainee</h3>
+        <ul>
+          <li>Create and track personal workouts</li>
+          <li>Log workout progress</li>
+          <li>Request custom plans from coaches</li>
+          <li>View request status and feedback</li>
+        </ul>
+      </div>
+      <div class="card coach">
+        <div class="card-icon coach"></div>
+        <h3>Coach</h3>
+        <ul>
+          <li>Manage trainee workout plans</li>
+          <li>Create custom workouts for clients</li>
+          <li>Add coaching notes and feedback</li>
+          <li>Track trainee progress</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
