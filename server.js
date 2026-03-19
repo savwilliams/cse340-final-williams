@@ -77,6 +77,11 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/login', (req, res) => {
+  res.render('forms/login/form', {
+    title: 'Login'
+  });
+});
 
 /**
  * Start Server
