@@ -1,4 +1,4 @@
-import db from './db.js';
+import db from './models/db.js';
 
 /**
  * Tests the database connection by running a simple query.
