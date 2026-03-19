@@ -87,6 +87,7 @@ Tasks:
 
 Phase 5 — Authentication System
 Tasks:
+-login and register form views
 register route
 login route
 password hashing with bcrypt

@@ -1,0 +1,15 @@
+:root {
+    --bg-dark: #0F151E;
+    --bg-card: #212E40;
+    --bg-card-section2: #212E40;
+    --accent-pink: #E8BECD;
+    --accent-trainee: #F6644A;
+    --accent-coach: #B28CAC;
+    --accent-secondary:#FBAE6B;
+    --text-white: #FFFFFF;
+    --text-muted: #CCCCCC;
+    --text-muted-2: #B0B0B0;
+    --text-muted-3: #D0D0D0;
+    --border: #777E8B;
+    --help-bg: #282A36;
+  }

@@ -31,7 +31,6 @@ app.use(session({
     store: new pgSession({
         conObject: {
             connectionString: process.env.DB_URL,
-            // Configure SSL for session store connection (required by BYU-I databases)
             ssl: {
                 ca: caCert,
                 rejectUnauthorized: true,
@@ -80,6 +79,12 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('forms/login/form', {
     title: 'Login'
+  });
+});
+
+app.get('/register', (req, res) => {
+  res.render('forms/register/form', {
+    title: 'Register'
   });
 });
 
