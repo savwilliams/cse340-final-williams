@@ -147,6 +147,7 @@ validate form inputs
 sanitize input
 parameterized SQL queries
 error handling middleware
+requirements pass (parameterized SQL, express-validator, global error handler)
 
 
 Phase 12 — Deployment

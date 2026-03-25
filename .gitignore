@@ -1,4 +1,7 @@
 .env
+resources.md
+requirements.md
+zhoursTally.md
 
 # Dependency directories
 node_modules/

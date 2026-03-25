@@ -5,6 +5,7 @@ import { testConnection } from './src/setup.js';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
 import { caCert } from './src/models/db.js';
+import routes from './src/controllers/routes.js';
 //==============================================
 
 /**
@@ -64,29 +65,10 @@ app.set('views', path.join(__dirname, 'src/views'));
 //enable Express to parse POST form bodies
 app.use(express.urlencoded({ extended: true }));
 
-
-
 /**
- * Routes
+ * Routes 
  */
-app.get('/', (req, res) => {
-  res.render('home', {
-    title: 'Workout Tracker',
-    bodyClass: 'home-page'
-  });
-});
-
-app.get('/login', (req, res) => {
-  res.render('forms/login/form', {
-    title: 'Login'
-  });
-});
-
-app.get('/register', (req, res) => {
-  res.render('forms/register/form', {
-    title: 'Register'
-  });
-});
+app.use('/', routes);
 
 /**
  * Start Server
