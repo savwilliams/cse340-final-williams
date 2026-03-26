@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import { homePage, loginForm, registerForm } from './index.js';
+import { homePage, loginForm} from './index.js';
+import registrationRoutes from './forms/registration.js';
 
 const router = Router();
 
 router.get('/', homePage);
 router.get('/login', loginForm);
-router.get('/register', registerForm);
+router.use('/register', registrationRoutes);
 
 export default router;
