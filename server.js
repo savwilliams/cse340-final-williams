@@ -1,3 +1,4 @@
+//==============================================
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -5,7 +6,10 @@ import { testConnection } from './src/models/setup.js';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
 import { caCert } from './src/models/db.js';
+import { startSessionCleanup } from './src/utils/session-cleanup.js';
+// Import MVC components
 import routes from './src/controllers/routes.js';
+import { addLocalVariables } from './src/middleware/global.js';
 //==============================================
 
 /**
@@ -20,6 +24,8 @@ const PORT = process.env.PORT || 3000;
  * Setup Express Server
  */
 const app = express();
+
+//==============================================
 
 /**
  * Configure Session
@@ -52,9 +58,9 @@ app.use(session({
 }));
 
 // Start automatic session cleanup
-//startSessionCleanup();
+startSessionCleanup();
 
-
+//==============================================
 
 /**
  * Configure Express
@@ -65,10 +71,21 @@ app.set('views', path.join(__dirname, 'src/views'));
 //enable Express to parse POST form bodies
 app.use(express.urlencoded({ extended: true }));
 
+//==============================================
+
+/**
+ * Global Middleware
+ */
+app.use(addLocalVariables);
+
+//==============================================
+
 /**
  * Routes 
  */
 app.use('/', routes);
+
+//==============================================
 
 /**
  * Start Server

@@ -9,4 +9,5 @@ router.get('/', homePage);
 router.use('/register', registrationRoutes);
 router.use('/login', loginRoutes);
 
+
 export default router;
