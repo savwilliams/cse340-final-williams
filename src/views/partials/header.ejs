@@ -9,8 +9,19 @@
 <body class="<%= typeof bodyClass !== 'undefined' ? bodyClass : '' %>">
   <header class="site-header">
     <nav class="site-header-nav">
+      <!-- Always visible links -->
       <a href="/">Home</a>
-      <a href="/login">Login</a>
+
+      <!-- Only visible when logged in -->
+      <% if (isLoggedIn) { %>
+        <a href="/logout">Logout</a>
+      <% } %>
+
+      <!-- Only visible when NOT logged in -->
+      <% if (!isLoggedIn) { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      <% } %>
     </nav>
     <div class="divider-line" aria-hidden="true"></div>
   </header>
