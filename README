@@ -93,13 +93,12 @@ Tasks:
 -login route
 -logout route
 -session management with express-session
--build protected dashboard
-
 
 
 Phase 6 — Authorization (Roles)
 After authentication works, add role protection.
 Tasks:
+-build protected dashboard
 middleware for isAuthenticated
 middleware for isCoach
 middleware for isAdmin

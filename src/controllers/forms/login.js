@@ -1,24 +1,11 @@
-import { body, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import { findUserByEmail, verifyPassword } from '../../models/forms/login.js';
 import { Router } from 'express';
+import { loginValidation } from '../../middleware/validation/forms.js';
 
 
 const router = Router();
 
-/**
- * Validation rules for login form
- */
-const loginValidation = [
-    body('email')
-        .trim()
-        .isEmail()
-        .withMessage('Please provide a valid email address')
-        .normalizeEmail(),
-
-    body('password')
-        .isLength({ min: 8 })
-        .withMessage('Password is required')
-];
 
 /**
  * Process login form submission.
@@ -55,13 +42,21 @@ const processLogin = async (req, res) => {
 
         // Store user in session
         req.session.user = user;
-        // Redirect to home page
-        res.redirect('/dashboard');
+        // Ensure the session is saved before redirecting
+        return req.session.save((err) => {
+            if (err) {
+                console.error('Error saving session:', err);
+                return res.redirect('/login');
+            }
+            return res.redirect('/dashboard');
+        });
 
     } catch (error) {
         console.error('Error logging in:', error);
-        res.redirect('/login');
+        return res.redirect('/login');
     }
+
+    
 };
 
 /**
