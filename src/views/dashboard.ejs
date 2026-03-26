@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<main class="dashboard-page">
+  <section class="dashboard-card">
+    <h1 class="dashboard-title"><%= typeof title !== 'undefined' ? title : 'Dashboard' %></h1>
+    <p class="dashboard-subtitle">
+      Welcome to your dashboard! Here you can view your account details and manage your account.
+    </p>
+
+    <% const displayUser = (typeof user !== 'undefined' && user) ? user : null; %>
+
+    <% if (displayUser) { %>
+      <div class="user-info">
+        <div class="user-detail">
+          <div class="label">Name</div>
+          <div class="value"><%= displayUser.name %></div>
+        </div>
+
+        <div class="user-detail">
+          <div class="label">Email</div>
+          <div class="value"><%= displayUser.email %></div>
+        </div>
+
+        <div class="user-detail">
+          <div class="label">Account Type</div>
+          <div class="value"><%= typeof displayUser.role !== 'undefined' ? displayUser.role : 'N/A' %></div>
+        </div>
+
+        <div class="user-detail">
+          <div class="label">Member since</div>
+          <div class="value">
+            <%= displayUser.created_at ? new Date(displayUser.created_at).toLocaleDateString() : 'N/A' %>
+          </div>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="no-user">
+        No user found in the session. Please log in again.
+      </div>
+    <% } %>
+
+    <div class="dashboard-actions">
+      <a href="/logout" class="dashboard-logout">Logout</a>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
+

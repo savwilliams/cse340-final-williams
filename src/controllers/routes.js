@@ -4,6 +4,7 @@ import registrationRoutes from './forms/registration.js';
 import loginRoutes from './forms/login.js';
 import { processLogout } from './forms/login.js';
 import {requireLogin} from '../middleware/auth.js';
+import { showDashboard} from './forms/login.js';
 
 // Create a new router instance
 const router = Router();
@@ -16,6 +17,8 @@ router.use('/register', registrationRoutes);
 router.use('/login', loginRoutes);
 // Logout routes
 router.get('/logout', processLogout);
+// Dashboard routes
+router.get('/dashboard', requireLogin, showDashboard);
 
 // // Add login-specific styles to all login routes
 // router.use('/login', (req, res, next) => {

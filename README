@@ -92,7 +92,8 @@ Tasks:
 -password hashing with bcrypt
 -login route
 -logout route
-session management with express-session
+-session management with express-session
+-build protected dashboard
 
 
 

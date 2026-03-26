@@ -56,7 +56,7 @@ const processLogin = async (req, res) => {
         // Store user in session
         req.session.user = user;
         // Redirect to home page
-        res.redirect('/');
+        res.redirect('/dashboard');
 
     } catch (error) {
         console.error('Error logging in:', error);
@@ -123,6 +123,12 @@ const showDashboard = (req, res) => {
         console.error('Security error: password found in sessionData.user');
         delete sessionData.user.password;
     }
+
+    return res.render('dashboard', {
+        title: 'Dashboard',
+        user,
+        sessionData
+    });
 };
 
 /**
@@ -133,6 +139,8 @@ const showLoginForm = (req, res) => {
         title: 'Login'
     });
 }; 
+
+
 
 // Routes
 router.get('/', showLoginForm);
