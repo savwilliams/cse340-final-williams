@@ -68,9 +68,7 @@ const processRegistration = async (req, res) => {
         res.redirect('/login');
        
     } catch (error) {
-        // TODO: Log the error to console
         console.error('Error registering user:', error);
-        // TODO: Redirect back to /register
         res.redirect('/register');
     }
 };

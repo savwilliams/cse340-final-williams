@@ -88,11 +88,12 @@ Tasks:
 Phase 5 — Authentication System
 Tasks:
 -login and register form views
-register route
-login route
-password hashing with bcrypt
+-register route
+-password hashing with bcrypt
+-login route
+-logout route
 session management with express-session
-logout route
+
 
 
 Phase 6 — Authorization (Roles)

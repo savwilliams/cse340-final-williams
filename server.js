@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { testConnection } from './src/setup.js';
+import { testConnection } from './src/models/setup.js';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
 import { caCert } from './src/models/db.js';
