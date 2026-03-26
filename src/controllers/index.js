@@ -9,11 +9,6 @@ const homePage = (req, res) => {
   });
 };
 
-const loginForm = (req, res) => {
-  res.render('forms/login/form', {
-    title: 'Login'
-  });
-};
 
 const registerForm = (req, res) => {
   res.render('forms/register/form', {
@@ -21,4 +16,4 @@ const registerForm = (req, res) => {
   });
 };
 
-export { homePage, loginForm, registerForm };
+export { homePage, registerForm };

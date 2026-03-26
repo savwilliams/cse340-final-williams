@@ -29,7 +29,7 @@ const processLogin = async (req, res) => {
 
     if (!errors.isEmpty()) {
         console.error('Validation errors:');
-        res.redirect('/login');
+        return res.redirect('/login');
     }
 
     // Extract email and password from req.body
@@ -130,9 +130,9 @@ const showDashboard = (req, res) => {
  */
 const showLoginForm = (req, res) => {
     res.render('forms/login/form', {
-        title: 'User Login'
+        title: 'Login'
     });
-};
+}; 
 
 // Routes
 router.get('/', showLoginForm);
