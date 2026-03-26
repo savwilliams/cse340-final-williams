@@ -9,11 +9,4 @@ const homePage = (req, res) => {
   });
 };
 
-
-const registerForm = (req, res) => {
-  res.render('forms/register/form', {
-    title: 'Register'
-  });
-};
-
-export { homePage, registerForm };
+export { homePage };
