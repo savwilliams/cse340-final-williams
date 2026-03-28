@@ -12,4 +12,15 @@ const planRequestBodyValidation = [
         .withMessage('Description must be no more than 5000 characters')
 ];
 
-export { planRequestBodyValidation };
+const planRequestUpdateValidation = [
+    body('workout_plan')
+        .trim()
+        .isLength({ max: 10000 })
+        .withMessage('Workout plan must be no more than 10000 characters'),
+    body('status')
+        .trim()
+        .isIn(['submitted', 'in_progress', 'completed'])
+        .withMessage('Invalid status')
+];
+
+export { planRequestBodyValidation, planRequestUpdateValidation };

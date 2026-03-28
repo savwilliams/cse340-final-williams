@@ -20,6 +20,9 @@
         <% if (typeof planRequestsPath !== 'undefined' && planRequestsPath) { %>
           <a href="<%= planRequestsPath %>">Plan requests</a>
         <% } %>
+        <% if (typeof coachPlanRequestsPath !== 'undefined' && coachPlanRequestsPath) { %>
+          <a href="<%= coachPlanRequestsPath %>">Trainee requests</a>
+        <% } %>
         <a href="/logout">Logout</a>
       <% } %>
 

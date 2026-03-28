@@ -39,12 +39,16 @@ const addLocalVariables = (req, res, next) => {
     res.locals.isLoggedIn = false;
     res.locals.dashboardPath = null;
     res.locals.planRequestsPath = null;
+    res.locals.coachPlanRequestsPath = null;
     if (req.session && req.session.user) {
         res.locals.isLoggedIn = true;
         const role = req.session.user.role;
         res.locals.dashboardPath = dashboardPathForRole(role);
         if (role === 'trainee') {
             res.locals.planRequestsPath = '/plan-requests';
+        }
+        if (role === 'coach') {
+            res.locals.coachPlanRequestsPath = '/coach/plan-requests';
         }
     }
 

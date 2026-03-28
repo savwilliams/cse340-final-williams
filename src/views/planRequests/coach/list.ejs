@@ -1,0 +1,33 @@
+<%- include('../../partials/header') %>
+
+<main class="dashboard-page">
+  <section class="dashboard-card plan-requests-section">
+    <h1 class="dashboard-title"><%= title %></h1>
+    <p class="dashboard-subtitle">
+      Open a request to add or edit the workout plan and update status.
+    </p>
+
+    <% if (!requests || requests.length === 0) { %>
+      <p class="plan-requests-empty">No plan requests yet.</p>
+    <% } else { %>
+      <ul class="plan-requests-list">
+        <% requests.forEach((r) => { %>
+          <li class="plan-requests-list-item">
+            <a href="/coach/plan-requests/<%= r.id %>" class="plan-requests-list-link">
+              <span class="plan-requests-list-title"><%= r.name %></span>
+              <span class="coach-list-trainee"><%= r.trainee_name %></span>
+              <span class="plan-requests-list-status status-<%= r.status %>"><%= r.status.replace(/_/g, ' ') %></span>
+              <span class="plan-requests-list-date"><%= r.created_at ? new Date(r.created_at).toLocaleString() : '' %></span>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+
+    <div class="dashboard-actions plan-requests-footer-actions">
+      <a href="/coach-dashboard" class="dashboard-link-secondary">Back to coach dashboard</a>
+    </div>
+  </section>
+</main>
+
+<%- include('../../partials/footer') %>

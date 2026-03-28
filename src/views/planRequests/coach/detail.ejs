@@ -1,0 +1,43 @@
+<%- include('../../partials/header') %>
+
+<main class="dashboard-page">
+  <section class="dashboard-card plan-requests-section">
+    <h1 class="dashboard-title"><%= planRequest.name %></h1>
+    <p class="coach-request-meta">
+      <strong>Trainee:</strong> <%= planRequest.trainee_name %>
+      <span class="coach-request-email">&lt;<%= planRequest.trainee_email %>&gt;</span>
+    </p>
+    <p class="plan-requests-meta">
+      <span class="plan-requests-status-badge status-<%= planRequest.status %>">Current status: <%= planRequest.status.replace(/_/g, ' ') %></span>
+    </p>
+
+    <% if (planRequest.description) { %>
+      <div class="plan-requests-body-block">
+        <h2 class="plan-requests-subheading">Trainee description</h2>
+        <p class="plan-requests-body-text"><%= planRequest.description %></p>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/coach/plan-requests/<%= planRequest.id %>/update" class="plan-requests-form coach-plan-form">
+      <h2 class="plan-requests-subheading">Your workout plan</h2>
+      <div class="form-group">
+        <label for="workout_plan">Workout plan (plain text)</label>
+        <textarea id="workout_plan" name="workout_plan" rows="10" maxlength="10000" class="register-input plan-requests-textarea" placeholder="Type the workout here. The trainee will see this on their request page."><%= planRequest.workout_plan || '' %></textarea>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" name="status" class="register-input coach-status-select">
+          <option value="submitted" <%= planRequest.status === 'submitted' ? 'selected' : '' %>>Submitted</option>
+          <option value="in_progress" <%= planRequest.status === 'in_progress' ? 'selected' : '' %>>In progress</option>
+          <option value="completed" <%= planRequest.status === 'completed' ? 'selected' : '' %>>Completed</option>
+        </select>
+      </div>
+      <div class="plan-requests-form-actions">
+        <button type="submit" class="plan-requests-button-primary">Save</button>
+        <a href="/coach/plan-requests" class="dashboard-link-secondary">Back to list</a>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include('../../partials/footer') %>

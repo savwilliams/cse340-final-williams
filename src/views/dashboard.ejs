@@ -40,7 +40,12 @@
     <% } %>
 
     <div class="dashboard-actions trainee-dashboard-links">
-      <a href="/plan-requests" class="dashboard-link-secondary">My plan requests</a>
+      <% if (displayUser && displayUser.role === 'trainee') { %>
+        <a href="/plan-requests" class="dashboard-link-secondary">My plan requests</a>
+      <% } %>
+      <% if (displayUser && displayUser.role === 'coach') { %>
+        <a href="/coach/plan-requests" class="dashboard-link-secondary">Trainee plan requests</a>
+      <% } %>
       <a href="/logout" class="dashboard-logout">Logout</a>
     </div>
   </section>
