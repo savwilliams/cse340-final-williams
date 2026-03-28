@@ -38,9 +38,14 @@ const addLocalVariables = (req, res, next) => {
     // Convenience variable for UI state based on session state
     res.locals.isLoggedIn = false;
     res.locals.dashboardPath = null;
+    res.locals.planRequestsPath = null;
     if (req.session && req.session.user) {
         res.locals.isLoggedIn = true;
-        res.locals.dashboardPath = dashboardPathForRole(req.session.user.role);
+        const role = req.session.user.role;
+        res.locals.dashboardPath = dashboardPathForRole(role);
+        if (role === 'trainee') {
+            res.locals.planRequestsPath = '/plan-requests';
+        }
     }
 
     // Continue to the next middleware or route handler

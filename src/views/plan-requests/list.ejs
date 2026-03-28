@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+<main class="dashboard-page">
+  <section class="dashboard-card plan-requests-section">
+    <h1 class="dashboard-title"><%= title %></h1>
+    <p class="dashboard-subtitle">
+      Submit a request for a workout plan from a coach. You can edit or delete your own requests while they are pending.
+    </p>
+
+    <p class="plan-requests-actions-top">
+      <a href="/plan-requests/new" class="plan-requests-button-primary">New request</a>
+    </p>
+
+    <% if (!requests || requests.length === 0) { %>
+      <p class="plan-requests-empty">You have not submitted any requests yet.</p>
+    <% } else { %>
+      <ul class="plan-requests-list">
+        <% requests.forEach((r) => { %>
+          <li class="plan-requests-list-item">
+            <a href="/plan-requests/<%= r.id %>" class="plan-requests-list-link">
+              <span class="plan-requests-list-title"><%= r.name %></span>
+              <span class="plan-requests-list-status status-<%= r.status %>"><%= r.status.replace(/_/g, ' ') %></span>
+              <span class="plan-requests-list-date"><%= r.created_at ? new Date(r.created_at).toLocaleString() : '' %></span>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+
+    <div class="dashboard-actions plan-requests-footer-actions">
+      <a href="/dashboard" class="dashboard-link-secondary">Back to dashboard</a>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

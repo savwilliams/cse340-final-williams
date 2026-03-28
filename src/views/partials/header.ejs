@@ -17,6 +17,9 @@
         <% if (typeof dashboardPath !== 'undefined' && dashboardPath) { %>
           <a href="<%= dashboardPath %>">Dashboard</a>
         <% } %>
+        <% if (typeof planRequestsPath !== 'undefined' && planRequestsPath) { %>
+          <a href="<%= planRequestsPath %>">Plan requests</a>
+        <% } %>
         <a href="/logout">Logout</a>
       <% } %>
 

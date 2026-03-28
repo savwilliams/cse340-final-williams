@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+
+<main class="dashboard-page">
+  <section class="dashboard-card plan-requests-section">
+    <h1 class="dashboard-title"><%= planRequest.name %></h1>
+    <p class="plan-requests-meta">
+      <span class="plan-requests-status-badge status-<%= planRequest.status %>">Status: <%= planRequest.status.replace(/_/g, ' ') %></span>
+      <% if (planRequest.updated_at) { %>
+        <span class="plan-requests-updated">Updated <%= new Date(planRequest.updated_at).toLocaleString() %></span>
+      <% } %>
+    </p>
+
+    <% if (planRequest.description) { %>
+      <div class="plan-requests-body-block">
+        <h2 class="plan-requests-subheading">Your request</h2>
+        <p class="plan-requests-body-text"><%= planRequest.description %></p>
+      </div>
+    <% } %>
+
+    <div class="plan-requests-body-block">
+      <h2 class="plan-requests-subheading">Coach workout plan</h2>
+      <% if (planRequest.workout_plan && planRequest.workout_plan.trim() !== '') { %>
+        <pre class="plan-requests-workout-plan"><%= planRequest.workout_plan %></pre>
+      <% } else { %>
+        <p class="plan-requests-placeholder">No plan from your coach yet.</p>
+      <% } %>
+    </div>
+
+    <div class="plan-requests-detail-actions">
+      <a href="/plan-requests/<%= planRequest.id %>/edit" class="plan-requests-button-secondary">Edit</a>
+      <form method="POST" action="/plan-requests/<%= planRequest.id %>/delete" class="plan-requests-inline-form" onsubmit="return confirm('Delete this request permanently?');">
+        <button type="submit" class="plan-requests-button-danger">Delete</button>
+      </form>
+    </div>
+
+    <div class="dashboard-actions plan-requests-footer-actions">
+      <a href="/plan-requests" class="dashboard-link-secondary">All requests</a>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

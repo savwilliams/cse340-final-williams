@@ -1,0 +1,171 @@
+/* Plan requests (trainee MVP) */
+
+.plan-requests-section .plan-requests-actions-top {
+  margin-bottom: 1.25rem;
+}
+
+.plan-requests-button-primary {
+  display: inline-block;
+  padding: 0.75rem 1.1rem;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  color: rgba(15, 21, 30, 0.95);
+  background: linear-gradient(
+    90deg,
+    var(--accent-secondary, #FBAE6B),
+    var(--accent-pink, #E8BECD)
+  );
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.plan-requests-button-secondary {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-white);
+  border: 1px solid rgba(119, 126, 139, 0.75);
+  background: rgba(18, 25, 36, 0.35);
+}
+
+.plan-requests-button-danger {
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(180, 60, 70, 0.9);
+  border: 1px solid rgba(220, 100, 110, 0.5);
+  cursor: pointer;
+}
+
+.plan-requests-empty {
+  color: var(--text-muted-2, #B0B0B0);
+  padding: 1rem 0;
+}
+
+.plan-requests-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.plan-requests-list-item {
+  border-bottom: 1px solid rgba(119, 126, 139, 0.4);
+}
+
+.plan-requests-list-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  padding: 0.85rem 0;
+  text-decoration: none;
+  color: var(--text-white);
+}
+
+.plan-requests-list-link:hover .plan-requests-list-title {
+  text-decoration: underline;
+}
+
+.plan-requests-list-title {
+  font-weight: 800;
+  flex: 1 1 140px;
+}
+
+.plan-requests-list-status {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  opacity: 0.95;
+}
+
+.plan-requests-list-date {
+  font-size: 0.8rem;
+  color: var(--text-muted-2, #B0B0B0);
+}
+
+.optional-label {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.plan-requests-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.plan-requests-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.plan-requests-footer-actions {
+  margin-top: 1.5rem;
+  justify-content: flex-start;
+}
+
+.plan-requests-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted-2, #B0B0B0);
+}
+
+.plan-requests-status-badge {
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.plan-requests-body-block {
+  margin-bottom: 1.5rem;
+}
+
+.plan-requests-subheading {
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+  color: var(--text-white);
+}
+
+.plan-requests-body-text,
+.plan-requests-placeholder {
+  margin: 0;
+  line-height: 1.55;
+  color: var(--text-muted-2, #B0B0B0);
+}
+
+.plan-requests-workout-plan {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(18, 25, 36, 0.45);
+  border: 1px solid rgba(119, 126, 139, 0.45);
+  color: var(--text-white);
+  white-space: pre-wrap;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.plan-requests-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.plan-requests-inline-form {
+  display: inline;
+}
+
+.trainee-dashboard-links {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

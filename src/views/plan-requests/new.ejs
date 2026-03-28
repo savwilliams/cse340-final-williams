@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<main class="dashboard-page">
+  <section class="dashboard-card plan-requests-section">
+    <h1 class="dashboard-title"><%= title %></h1>
+    <p class="dashboard-subtitle">Describe what you are looking for. A coach will review your request.</p>
+
+    <form method="POST" action="/plan-requests" class="plan-requests-form">
+      <div class="form-group">
+        <label for="name">Title</label>
+        <input type="text" id="name" name="name" required minlength="2" maxlength="200" class="register-input" placeholder="Short title for your request" />
+      </div>
+      <div class="form-group">
+        <label for="description">Description <span class="optional-label">(optional)</span></label>
+        <textarea id="description" name="description" rows="6" maxlength="5000" class="register-input plan-requests-textarea" placeholder="Goals, limitations, equipment you have, etc."></textarea>
+      </div>
+      <div class="plan-requests-form-actions">
+        <button type="submit" class="plan-requests-button-primary">Submit request</button>
+        <a href="/plan-requests" class="dashboard-link-secondary">Cancel</a>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

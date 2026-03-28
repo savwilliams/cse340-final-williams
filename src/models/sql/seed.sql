@@ -71,13 +71,14 @@ CREATE TABLE exercise_logs (
     weight NUMERIC(6,2)
 );
 
--- Plan requests table
+-- Plan requests table 
 CREATE TABLE plan_requests (
     id SERIAL PRIMARY KEY,
-    trainee_id INT REFERENCES users(id) ON DELETE CASCADE,
+    trainee_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     coach_id INT REFERENCES users(id) ON DELETE SET NULL,
     name TEXT NOT NULL,
     description TEXT,
+    workout_plan TEXT NOT NULL DEFAULT '',
     status TEXT NOT NULL DEFAULT 'submitted'
         CHECK (status IN ('submitted','in_progress','completed')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -95,3 +96,4 @@ CREATE TABLE request_notes (
 
 
 --======== Insert Data ========
+COMMIT;
