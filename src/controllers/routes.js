@@ -3,7 +3,7 @@ import { homePage } from './index.js';
 import registrationRoutes from './forms/registration.js';
 import loginRoutes from './forms/login.js';
 import { processLogout } from './forms/login.js';
-import {requireLogin, requireRole} from '../middleware/auth.js';
+import { requireRole } from '../middleware/auth.js';
 import { showDashboard} from './forms/login.js';
 
 // Create a new router instance
@@ -18,8 +18,11 @@ router.use('/login', loginRoutes);
 // Logout routes
 router.get('/logout', processLogout);
 // Dashboard routes
-router.get('/dashboard', requireLogin, showDashboard);
+router.get('/dashboard', requireRole('trainee'), showDashboard);
 router.get('/admin-dashboard', requireRole('admin'), showDashboard);
+router.get('/coach-dashboard', requireRole('coach'), showDashboard);
+
+
 
 // // Add login-specific styles to all login routes
 // router.use('/login', (req, res, next) => {

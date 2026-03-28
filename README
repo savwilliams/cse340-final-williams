@@ -99,10 +99,10 @@ Phase 6 — Authorization (Roles)
 After authentication works, add role protection.
 Tasks:
 -build protected dashboard
-middleware for isAuthenticated
-middleware for isCoach
-middleware for isAdmin
-protect routes
+-middleware for isAuthenticated
+-middleware for isCoach
+-middleware for isAdmin
+-protect routes
 
 
 Phase 7 — Core Feature: Workouts
@@ -159,3 +159,4 @@ deploy to Render
 connect PostgreSQL database
 configure environment variables
 ====================================
+

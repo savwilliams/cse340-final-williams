@@ -48,7 +48,7 @@ const processLogin = async (req, res) => {
                 console.error('Error saving session:', err);
                 return res.redirect('/login');
             }
-            return res.redirect('/dashboard');
+            return res.redirect('/');
         });
 
     } catch (error) {

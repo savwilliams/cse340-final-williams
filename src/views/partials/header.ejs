@@ -14,6 +14,9 @@
 
       <!-- Only visible when logged in -->
       <% if (isLoggedIn) { %>
+        <% if (typeof dashboardPath !== 'undefined' && dashboardPath) { %>
+          <a href="<%= dashboardPath %>">Dashboard</a>
+        <% } %>
         <a href="/logout">Logout</a>
       <% } %>
 

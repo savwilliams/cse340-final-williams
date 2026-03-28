@@ -1,4 +1,18 @@
 /**
+ * Nav: redirect to the correct dashboard based on the user's role
+ */
+const dashboardPathForRole = (role) => {
+    switch (role) {
+        case 'admin':
+            return '/admin-dashboard';
+        case 'coach':
+            return '/coach-dashboard';
+        default:
+            return '/dashboard';
+    }
+};
+
+/**
  * Helper: get a greeting based on current time.
  */
 const getCurrentGreeting = () => {
@@ -23,8 +37,10 @@ const addLocalVariables = (req, res, next) => {
 
     // Convenience variable for UI state based on session state
     res.locals.isLoggedIn = false;
+    res.locals.dashboardPath = null;
     if (req.session && req.session.user) {
         res.locals.isLoggedIn = true;
+        res.locals.dashboardPath = dashboardPathForRole(req.session.user.role);
     }
 
     // Continue to the next middleware or route handler
