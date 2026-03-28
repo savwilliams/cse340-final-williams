@@ -1,0 +1,17 @@
+.error-page {
+    text-align: center;
+    max-width: 42rem;
+    margin-inline: auto;
+    padding: 1rem;
+}
+
+.error-page pre {
+    text-align: left;
+}
+
+.error-image {
+    max-width: min(100%, 600px);
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}

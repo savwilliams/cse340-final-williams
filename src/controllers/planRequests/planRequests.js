@@ -28,7 +28,7 @@ const parseId = (req, res, next) => {
 
 
 // =======================
-// Wrap async Express handlers
+// Wrap async Express handlers - reduces repetative try/catch blocks
 // =======================
 const asyncHandler = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch((err) => {
