@@ -105,7 +105,7 @@ Tasks:
 -protect routes
 
 
-Phase 7 — Core Feature: Workouts
+Phase 7 — Core Feature: Workouts (*note: I decided to build a MVP first and will implement this later)
 Implement the main content system.
 Tasks:
 create workout
@@ -114,7 +114,7 @@ delete workout
 view workouts
 
 
-Phase 8 — Workout Logging
+Phase 8 — Workout Logging (*note: I decided to build a MVP first and will implement this later)
 Add the progress tracking feature.
 Tasks:
 log workout
@@ -126,10 +126,10 @@ view logs
 Phase 9 — Workflow System
 Implement the required multi-stage workflow.
 Tasks:
-submit workout plan request
-coach views requests
-coach updates request status
-coach adds notes
+-submit workout plan request
+-coach views requests
+-coach updates request status
+-coach adds notes
 
 
 Phase 10 — Admin Dashboard
