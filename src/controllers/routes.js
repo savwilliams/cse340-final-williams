@@ -23,9 +23,9 @@ router.get('/logout', processLogout);
 router.get('/dashboard', requireRole('trainee'), showDashboard);
 router.get('/admin-dashboard', requireRole('admin'), showDashboard);
 router.get('/coach-dashboard', requireRole('coach'), showDashboard);
-// Admin routes 
+// Admin user management (/admin/users, …)
 router.use('/admin', manageUsersRouter);
-// Plan requests
+// Plan requests (trainee, coach, and /admin/plan-requests)
 router.use(planRequestsRouter);
 
 

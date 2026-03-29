@@ -26,6 +26,9 @@
         <% if (typeof manageUsersPath !== 'undefined' && manageUsersPath) { %>
           <a href="<%= manageUsersPath %>">Manage users</a>
         <% } %>
+        <% if (typeof adminPlanRequestsPath !== 'undefined' && adminPlanRequestsPath) { %>
+          <a href="<%= adminPlanRequestsPath %>">Plan requests</a>
+        <% } %>
         <a href="/logout">Logout</a>
       <% } %>
 

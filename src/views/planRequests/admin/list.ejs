@@ -3,7 +3,7 @@
   <section class="admin-card">
     <h1 class="admin-title"><%= title %></h1>
     <p class="admin-subtitle">
-      All trainee plan requests. You can remove a request entirely; this cannot be undone.
+      All trainee plan requests.
     </p>
     <% if (!requests || requests.length === 0) { %>
       <p class="admin-empty">No plan requests yet.</p>
@@ -23,7 +23,7 @@
             <% requests.forEach((r) => { %>
               <tr>
                 <td>
-                  <span class="admin-cell-strong"><%= r.name %></span>
+                  <a href="/admin/plan-requests/<%= r.id %>" class="admin-cell-strong admin-table-title-link"><%= r.name %></a>
                   <% if (r.description) { %>
                     <p class="admin-request-desc"><%= r.description.length > 120 ? r.description.slice(0, 120) + '…' : r.description %></p>
                   <% } %>

@@ -114,6 +114,16 @@ const findPlanRequestById = async (requestId) => {
 };
 
 
+const deletePlanRequestByAdmin = async (requestId) => {
+    const query = `
+        DELETE FROM plan_requests
+        WHERE id = $1
+    `;
+    const result = await db.query(query, [requestId]);
+    return result.rowCount > 0;
+};
+
+
 const updatePlanRequest = async (requestId, coachId, workoutPlan, status) => {
     const query = `
         UPDATE plan_requests
@@ -136,5 +146,6 @@ export {
     deleteOwnRequest,
     listAllPlanRequests,
     findPlanRequestById,
+    deletePlanRequestByAdmin,
     updatePlanRequest
 };

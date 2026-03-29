@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { validationResult } from 'express-validator';
-import { listByTraineeId, findByIdForTrainee, createRequest, updateOwnRequest, deleteOwnRequest, listAllPlanRequests, findPlanRequestById, updatePlanRequest as updatePlanRequestInDb } from '../../models/planRequests/planRequests.js';
+import { listByTraineeId, findByIdForTrainee, createRequest, updateOwnRequest, deleteOwnRequest, listAllPlanRequests, findPlanRequestById, deletePlanRequestByAdmin, updatePlanRequest as updatePlanRequestInDb } from '../../models/planRequests/planRequests.js';
 import { planRequestBodyValidation, planRequestUpdateValidation } from '../../middleware/validation/planRequests.js';
 import { requireRole } from '../../middleware/auth.js';
 
@@ -14,7 +14,9 @@ const userId = (req) => req.session.user.id;
 
 const planRequestsListPath = (req) => {
     const path = req.originalUrl.split('?')[0];
-    return path.includes('/coach/plan-requests') ? '/coach/plan-requests' : '/plan-requests';
+    if (path.includes('/coach/plan-requests')) return '/coach/plan-requests';
+    if (path.includes('/admin/plan-requests')) return '/admin/plan-requests';
+    return '/plan-requests';
 };
 
 const parseId = (req, res, next) => {
@@ -150,6 +152,34 @@ const saveCoachPlanRequest = async (req, res) => {
 };
 
 // =======================
+// Admin 
+// =======================
+
+const listAdminPlanRequests = async (req, res) => {
+    const rows = await listAllPlanRequests();
+    res.render('planRequests/admin/list', {
+        title: 'Plan requests',
+        requests: rows
+    });
+};
+
+const showAdminPlanRequest = async (req, res) => {
+    const row = await findPlanRequestById(req.planRequestId);
+    if (!row) {
+        return res.redirect(planRequestsListPath(req));
+    }
+    res.render('planRequests/admin/detail', {
+        title: row.name,
+        planRequest: row
+    });
+};
+
+const destroyAdminPlanRequest = async (req, res) => {
+    await deletePlanRequestByAdmin(req.planRequestId);
+    res.redirect(planRequestsListPath(req));
+};
+
+// =======================
 // Routes
 // =======================
 
@@ -164,5 +194,9 @@ router.post('/plan-requests/:id/delete', requireRole('trainee'), parseId, asyncH
 router.get('/coach/plan-requests', requireRole('coach'), asyncHandler(listCoachPlanRequests));
 router.get('/coach/plan-requests/:id',requireRole('coach'), parseId, asyncHandler(showCoachPlanRequest));
 router.post('/coach/plan-requests/:id/update', requireRole('coach'), parseId, planRequestUpdateValidation, asyncHandler(saveCoachPlanRequest));
+
+router.get('/admin/plan-requests', requireRole('admin'), asyncHandler(listAdminPlanRequests));
+router.get('/admin/plan-requests/:id', requireRole('admin'), parseId, asyncHandler(showAdminPlanRequest));
+router.post('/admin/plan-requests/:id/delete', requireRole('admin'), parseId, asyncHandler(destroyAdminPlanRequest));
 
 export default router;

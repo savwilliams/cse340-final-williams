@@ -77,6 +77,13 @@
   .admin-cell-strong {
     font-weight: 700;
   }
+  a.admin-table-title-link {
+    color: var(--text-white);
+    text-decoration: none;
+  }
+  a.admin-table-title-link:hover {
+    text-decoration: underline;
+  }
   .admin-cell-muted {
     color: var(--text-muted-2, #B0B0B0);
     white-space: nowrap;

@@ -9,7 +9,7 @@ There are three roles: Admin, Coach, and Trainee
 
 Trainee Can:
 Create personal workouts
-Edit/delete their workouts
+Edit/view/delete their workouts
 Log workouts
 Submit plan requests to Coach
 View request status
@@ -17,11 +17,10 @@ View request status
 Coach Can:
 View workout plan requests from trainees
 Create workouts for trainees
-Edit workouts they created
-Delete workouts they created
 Add coaching notes to plan requests
-View trainee workout progress
 Update request status
+View, edit, delete workouts they created
+View trainee workout progress
 Assign trainees to themselves
 Remove coach–trainee assignments
 
@@ -29,6 +28,7 @@ Admin Can:
 Full system control
 Manage users and roles (promote trainee to coach)
 Delete any workout
+Add and delete exercise content
 View all workout logs
 Manage plan requests
 
@@ -135,10 +135,10 @@ Tasks:
 Phase 10 — Admin Dashboard
 Implement admin control.
 Tasks:
-manage users
-change user roles
-view all workouts
-delete inappropriate workouts
+-manage users
+-change user roles
+-view all plan requests
+delete workouts/requests (will implement later)
 
 
 Phase 11 — Validation and Security
@@ -147,16 +147,16 @@ Tasks:
 validate form inputs
 sanitize input
 parameterized SQL queries
-error handling middleware
+-error handling middleware
 requirements pass (parameterized SQL, express-validator, global error handler)
 
 
 Phase 12 — Deployment
 Final step!
 Tasks:
-push project to GitHub
-deploy to Render
-connect PostgreSQL database
+-push project to GitHub
+-deploy to Render
+-connect PostgreSQL database
 configure environment variables
 ====================================
 
