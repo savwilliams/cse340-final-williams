@@ -3,8 +3,8 @@ import { body } from 'express-validator';
 const planRequestBodyValidation = [
     body('name')
         .trim()
-        .isLength({ min: 2, max: 200 })
-        .withMessage('Title must be between 2–200 characters'),
+        .isLength({ min: 1, max: 200 })
+        .withMessage('Title must be between 1–200 characters'),
     body('description')
         .optional({ checkFalsy: true })
         .trim()

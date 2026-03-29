@@ -7,6 +7,7 @@ import { requireRole } from '../middleware/auth.js';
 import { showDashboard } from './forms/login.js';
 import planRequestsRouter from './planRequests/planRequests.js';
 import manageUsersRouter from './admin/manageUsers.js';
+import manageExercisesRouter from './admin/manageExercises.js';
 
 // Create a new router instance
 const router = Router();
@@ -27,6 +28,8 @@ router.get('/coach-dashboard', requireRole('coach'), showDashboard);
 router.use('/admin', manageUsersRouter);
 // Plan requests (trainee, coach, and /admin/plan-requests)
 router.use(planRequestsRouter);
+// Admin exercise management (/admin/exercises, …)
+router.use('/admin', manageExercisesRouter);
 
 
 

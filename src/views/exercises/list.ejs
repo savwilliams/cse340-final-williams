@@ -1,0 +1,77 @@
+<%- include('../partials/header') %>
+
+<main class="admin-page">
+  <section class="admin-card">
+    <h1 class="admin-title"><%= title %></h1>
+    <p class="admin-subtitle">
+      Add exercises for coaches and trainees to use in workouts. Names must be unique.
+    </p>
+
+    <h2 class="admin-form-section-title">Add exercise</h2>
+    <form method="post" action="/admin/exercises" class="admin-exercise-form">
+      <div class="form-group">
+        <label for="new-name">Name</label>
+        <input type="text" id="new-name" name="name" required maxlength="200" class="register-input" placeholder="e.g. Barbell squat">
+      </div>
+      <div class="form-group">
+        <label for="new-description">Description <span class="optional-label">(optional)</span></label>
+        <textarea id="new-description" name="description" rows="3" maxlength="5000" class="register-input plan-requests-textarea" placeholder="Short instructions"></textarea>
+      </div>
+      <button type="submit" class="plan-requests-button-primary">Add exercise</button>
+    </form>
+
+    <% if (!exercises || exercises.length === 0) { %>
+      <p class="admin-empty">No exercises yet. Add one above.</p>
+    <% } else { %>
+      <h2 class="admin-form-section-title">All exercises</h2>
+      <div class="admin-table-wrap" role="region" aria-label="Exercises">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col" class="admin-th-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% exercises.forEach((ex) => { %>
+              <tr>
+                <td colspan="3" class="admin-exercise-row-cell">
+                  <form method="post" action="/admin/exercises/<%= ex.id %>/update" class="admin-exercise-row-form">
+                    <div class="admin-exercise-edit-fields">
+                      <div class="form-group admin-exercise-name-field">
+                        <label class="visually-hidden" for="name-<%= ex.id %>">Name</label>
+                        <input type="text" id="name-<%= ex.id %>" name="name" value="<%= ex.name %>" required maxlength="200" class="register-input">
+                      </div>
+                      <div class="form-group admin-exercise-desc-field">
+                        <label class="visually-hidden" for="desc-<%= ex.id %>">Description</label>
+                        <textarea id="desc-<%= ex.id %>" name="description" rows="2" maxlength="5000" class="register-input plan-requests-textarea" placeholder="Description"><%= ex.description || '' %></textarea>
+                      </div>
+                    </div>
+                    <div class="admin-exercise-row-actions">
+                      <button type="submit" class="admin-btn admin-btn-promote">Save</button>
+                    </div>
+                  </form>
+                  <form
+                    method="post"
+                    action="/admin/exercises/<%= ex.id %>/delete"
+                    class="admin-inline-form admin-exercise-delete-form"
+                    onsubmit="return confirm('Delete this exercise? This may fail if it is still used in workouts.');"
+                  >
+                    <button type="submit" class="admin-btn admin-btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+
+    <div class="admin-footer-actions">
+      <a href="/admin-dashboard" class="admin-link-secondary">Back to admin dashboard</a>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

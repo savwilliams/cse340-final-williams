@@ -6,8 +6,8 @@ import { body } from 'express-validator';
 const registrationValidation = [
   body('name')
     .trim()
-    .isLength({ min: 2 })
-    .withMessage('Name must be at least 2 characters'),
+    .isLength({ min: 1 })
+    .withMessage('Name must be at least 1 character'),
   body('email')
     .trim()
     .isEmail()

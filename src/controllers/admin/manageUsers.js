@@ -36,7 +36,7 @@ const promoteUserToCoach = async (req, res, next) => {
     }
 };
 
-// Mounted at /admin — these become /admin/users and /admin/users/:id/promote
+
 router.get('/users', requireRole('admin'), showUsersList);
 router.post(
     '/users/:id/promote',
