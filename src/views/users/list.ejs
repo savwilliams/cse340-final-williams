@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+<main class="admin-page">
+  <section class="admin-card">
+    <h1 class="admin-title"><%= title %></h1>
+    <p class="admin-subtitle">
+      Review accounts, roles, and membership. Promote trainees to coach when they are ready to fulfill requests.
+    </p>
+    <% if (!users || users.length === 0) { %>
+      <p class="admin-empty">No users found.</p>
+    <% } else { %>
+      <div class="admin-table-wrap" role="region" aria-label="User accounts">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col">Member since</th>
+              <th scope="col" class="admin-th-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach((u) => { %>
+              <tr>
+                <td class="admin-cell-strong"><%= u.name %></td>
+                <td><%= u.email %></td>
+                <td>
+                  <span class="admin-role-badge admin-role-<%= u.role %>"><%= u.role %></span>
+                </td>
+                <td class="admin-cell-muted">
+                  <%= u.created_at ? new Date(u.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '—' %>
+                </td>
+                <td class="admin-cell-actions">
+                  <% if (u.role === 'trainee') { %>
+                    <form class="admin-inline-form" method="post" action="/admin/users/<%= u.id %>/promote">
+                      <button type="submit" class="admin-btn admin-btn-promote">Promote to coach</button>
+                    </form>
+                  <% } else { %>
+                    <span class="admin-action-placeholder">—</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+    <div class="admin-footer-actions">
+      <a href="/admin-dashboard" class="admin-link-secondary">Back to admin dashboard</a>
+    </div>
+  </section>
+</main>
+<%- include('../partials/footer') %>

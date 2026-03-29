@@ -1,0 +1,64 @@
+<%- include('../../partials/header') %>
+<main class="admin-page">
+  <section class="admin-card">
+    <h1 class="admin-title"><%= title %></h1>
+    <p class="admin-subtitle">
+      All trainee plan requests. You can remove a request entirely; this cannot be undone.
+    </p>
+    <% if (!requests || requests.length === 0) { %>
+      <p class="admin-empty">No plan requests yet.</p>
+    <% } else { %>
+      <div class="admin-table-wrap" role="region" aria-label="Plan requests">
+        <table class="admin-table admin-table-requests">
+          <thead>
+            <tr>
+              <th scope="col">Request</th>
+              <th scope="col">Trainee</th>
+              <th scope="col">Status</th>
+              <th scope="col">Created</th>
+              <th scope="col" class="admin-th-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% requests.forEach((r) => { %>
+              <tr>
+                <td>
+                  <span class="admin-cell-strong"><%= r.name %></span>
+                  <% if (r.description) { %>
+                    <p class="admin-request-desc"><%= r.description.length > 120 ? r.description.slice(0, 120) + '…' : r.description %></p>
+                  <% } %>
+                </td>
+                <td>
+                  <span class="admin-trainee-name"><%= r.trainee_name %></span>
+                  <% if (r.trainee_email) { %>
+                    <span class="admin-trainee-email"><%= r.trainee_email %></span>
+                  <% } %>
+                </td>
+                <td>
+                  <span class="plan-requests-list-status status-<%= r.status %>"><%= r.status.replace(/_/g, ' ') %></span>
+                </td>
+                <td class="admin-cell-muted">
+                  <%= r.created_at ? new Date(r.created_at).toLocaleString() : '—' %>
+                </td>
+                <td class="admin-cell-actions">
+                  <form
+                    class="admin-inline-form"
+                    method="post"
+                    action="/admin/plan-requests/<%= r.id %>/delete"
+                    onsubmit="return confirm('Delete this plan request permanently?');"
+                  >
+                    <button type="submit" class="admin-btn admin-btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+    <div class="admin-footer-actions">
+      <a href="/admin-dashboard" class="admin-link-secondary">Back to admin dashboard</a>
+    </div>
+  </section>
+</main>
+<%- include('../../partials/footer') %>

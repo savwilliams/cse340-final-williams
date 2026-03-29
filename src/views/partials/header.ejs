@@ -23,6 +23,9 @@
         <% if (typeof coachPlanRequestsPath !== 'undefined' && coachPlanRequestsPath) { %>
           <a href="<%= coachPlanRequestsPath %>">Trainee requests</a>
         <% } %>
+        <% if (typeof manageUsersPath !== 'undefined' && manageUsersPath) { %>
+          <a href="<%= manageUsersPath %>">Manage users</a>
+        <% } %>
         <a href="/logout">Logout</a>
       <% } %>
 

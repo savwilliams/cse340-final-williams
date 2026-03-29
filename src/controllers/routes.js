@@ -6,6 +6,7 @@ import { processLogout } from './forms/login.js';
 import { requireRole } from '../middleware/auth.js';
 import { showDashboard } from './forms/login.js';
 import planRequestsRouter from './planRequests/planRequests.js';
+import manageUsersRouter from './admin/manageUsers.js';
 
 // Create a new router instance
 const router = Router();
@@ -22,7 +23,9 @@ router.get('/logout', processLogout);
 router.get('/dashboard', requireRole('trainee'), showDashboard);
 router.get('/admin-dashboard', requireRole('admin'), showDashboard);
 router.get('/coach-dashboard', requireRole('coach'), showDashboard);
-// Plan requests (trainee + coach; roles enforced per route inside router)
+// Admin routes 
+router.use('/admin', manageUsersRouter);
+// Plan requests
 router.use(planRequestsRouter);
 
 

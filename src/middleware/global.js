@@ -40,6 +40,7 @@ const addLocalVariables = (req, res, next) => {
     res.locals.dashboardPath = null;
     res.locals.planRequestsPath = null;
     res.locals.coachPlanRequestsPath = null;
+    res.locals.manageUsersPath = null;
     if (req.session && req.session.user) {
         res.locals.isLoggedIn = true;
         const role = req.session.user.role;
@@ -49,6 +50,9 @@ const addLocalVariables = (req, res, next) => {
         }
         if (role === 'coach') {
             res.locals.coachPlanRequestsPath = '/coach/plan-requests';
+        }
+        if (role === 'admin') {
+            res.locals.manageUsersPath = '/admin/users';
         }
     }
 
