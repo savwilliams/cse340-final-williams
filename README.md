@@ -1,7 +1,9 @@
 1. Project Description: What your site does and who it is for
 This is an app that allows users to create and track personal workouts and optionally have a coach who can create and manage workout plans for them. 
 
+
 2. Database Schema: An image of your entity relation diagram (ERD) exported from pgAdmin showing your tables and relationships
+![ERD Diagram](erdDiagram.png)
 
 
 3. User Roles: Explanation of each role and what they can do
@@ -40,7 +42,7 @@ Admin: admin@gmail.com
 
 
 5. Known Limitations: Any features you did not complete or bugs you are aware of
-
+See phase 7 & 8 below. Additionally, Users and coaches cannot view exercises or create workouts yet. 
 
 ================================
 Notes for self : Project Roadmap 
@@ -52,7 +54,6 @@ Tasks:
 -Confirm the user roles
 -Confirm the features each role has
 -Decide what core entities exist (users, workouts, logs, requests, etc.)
-
 
 
 Phase 2 — Database Design 
@@ -144,19 +145,11 @@ delete workouts/requests (will implement later)
 Phase 11 — Validation and Security
 Improve robustness.
 Tasks:
-validate form inputs
-sanitize input
-parameterized SQL queries
+-validate form inputs
+-sanitize input
+-parameterized SQL queries
 -error handling middleware
-requirements pass (parameterized SQL, express-validator, global error handler)
+-requirements pass (parameterized SQL, express-validator, global error handler)
 
-
-Phase 12 — Deployment
-Final step!
-Tasks:
--push project to GitHub
--deploy to Render
--connect PostgreSQL database
-configure environment variables
 ====================================
 
