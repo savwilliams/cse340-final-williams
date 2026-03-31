@@ -8,15 +8,6 @@ const router = Router();
 
 const listPath = '/admin/exercises';
 
-const parseExerciseId = (req, res, next) => {
-    const id = Number.parseInt(req.params.id, 10);
-    if (Number.isNaN(id) || id < 1) {
-        return res.redirect(listPath);
-    }
-    req.exerciseId = id;
-    next();
-};
-
 const showExercisesList = async (req, res, next) => {
     try {
         const exercises = await getAllExercises();
@@ -47,6 +38,10 @@ const createExerciseHandler = async (req, res, next) => {
 };
 
 const updateExerciseHandler = async (req, res, next) => {
+    const exerciseId = parseInt(req.params.id);
+    if (Number.isNaN(exerciseId) || exerciseId < 1) {
+        return res.redirect(listPath);
+    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.error('Exercise validation:', errors.array());
@@ -54,7 +49,7 @@ const updateExerciseHandler = async (req, res, next) => {
     }
     try {
         const { name, description } = req.body;
-        await updateExercise(req.exerciseId, name, description || null);
+        await updateExercise(exerciseId, name, description || null);
         res.redirect(listPath);
     } catch (err) {
         console.error('[manageExercises]', err);
@@ -64,7 +59,11 @@ const updateExerciseHandler = async (req, res, next) => {
 
 const deleteExerciseHandler = async (req, res, next) => {
     try {
-        await deleteExercise(req.exerciseId);
+        const exerciseId = parseInt(req.params.id);
+        if (Number.isNaN(exerciseId) || exerciseId < 1) {
+            return res.redirect(listPath);
+        }
+        await deleteExercise(exerciseId);
         res.redirect(listPath);
     } catch (err) {
         console.error('[manageExercises]', err);
@@ -74,7 +73,7 @@ const deleteExerciseHandler = async (req, res, next) => {
 
 router.get('/exercises', requireRole('admin'), showExercisesList);
 router.post('/exercises', requireRole('admin'), exerciseBodyValidation, createExerciseHandler);
-router.post('/exercises/:id/update', requireRole('admin'), parseExerciseId, exerciseBodyValidation,updateExerciseHandler);
-router.post('/exercises/:id/delete', requireRole('admin'), parseExerciseId, deleteExerciseHandler);
+router.post('/exercises/:id/update', requireRole('admin'), exerciseBodyValidation, updateExerciseHandler);
+router.post('/exercises/:id/delete', requireRole('admin'), deleteExerciseHandler);
 
 export default router;

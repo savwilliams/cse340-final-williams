@@ -138,14 +138,4 @@ const updatePlanRequest = async (requestId, coachId, workoutPlan, status) => {
     return result.rows[0] || null;
 };
 
-export {
-    listByTraineeId,
-    findByIdForTrainee,
-    createRequest,
-    updateOwnRequest,
-    deleteOwnRequest,
-    listAllPlanRequests,
-    findPlanRequestById,
-    deletePlanRequestByAdmin,
-    updatePlanRequest
-};
+export { listByTraineeId, findByIdForTrainee, createRequest, updateOwnRequest, deleteOwnRequest, listAllPlanRequests, findPlanRequestById, deletePlanRequestByAdmin, updatePlanRequest };

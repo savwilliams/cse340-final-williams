@@ -12,23 +12,6 @@ const router = Router();
 
 const userId = (req) => req.session.user.id;
 
-const planRequestsListPath = (req) => {
-    const path = req.originalUrl.split('?')[0];
-    if (path.includes('/coach/plan-requests')) return '/coach/plan-requests';
-    if (path.includes('/admin/plan-requests')) return '/admin/plan-requests';
-    return '/plan-requests';
-};
-
-const parseId = (req, res, next) => {
-    const id = Number.parseInt(req.params.id, 10);
-    if (Number.isNaN(id) || id < 1) {
-        return res.redirect(planRequestsListPath(req));
-    }
-    req.planRequestId = id;
-    next();
-};
-
-
 // =======================
 // Wrap async Express handlers - reduces repetative try/catch blocks
 // =======================
@@ -69,7 +52,11 @@ const createPlanRequest = async (req, res) => {
 };
 
 const showPlanRequest = async (req, res) => {
-    const row = await findByIdForTrainee(req.planRequestId, userId(req));
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/plan-requests');
+    }
+    const row = await findByIdForTrainee(planRequestId, userId(req));
     if (!row) {
         return res.redirect('/plan-requests');
     }
@@ -80,7 +67,11 @@ const showPlanRequest = async (req, res) => {
 };
 
 const editPlanRequestForm = async (req, res) => {
-    const row = await findByIdForTrainee(req.planRequestId, userId(req));
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/plan-requests');
+    }
+    const row = await findByIdForTrainee(planRequestId, userId(req));
     if (!row) {
         return res.redirect('/plan-requests');
     }
@@ -91,21 +82,29 @@ const editPlanRequestForm = async (req, res) => {
 };
 
 const updateTraineePlanRequest = async (req, res) => {
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/plan-requests');
+    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.error('Plan request validation:', errors.array());
-        return res.redirect(`/plan-requests/${req.planRequestId}/edit`);
+        return res.redirect(`/plan-requests/${req.params.id}/edit`);
     }
     const { name, description } = req.body;
-    const row = await updateOwnRequest(req.planRequestId, userId(req), name, description);
+    const row = await updateOwnRequest(planRequestId, userId(req), name, description);
     if (!row) {
         return res.redirect('/plan-requests');
     }
-    return res.redirect(`/plan-requests/${req.planRequestId}`);
+    return res.redirect(`/plan-requests/${planRequestId}`);
 };
 
 const destroyPlanRequest = async (req, res) => {
-    await deleteOwnRequest(req.planRequestId, userId(req));
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/plan-requests');
+    }
+    await deleteOwnRequest(planRequestId, userId(req));
     return res.redirect('/plan-requests');
 };
 
@@ -122,7 +121,11 @@ const listCoachPlanRequests = async (req, res) => {
 };
 
 const showCoachPlanRequest = async (req, res) => {
-    const row = await findPlanRequestById(req.planRequestId);
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/coach/plan-requests');
+    }
+    const row = await findPlanRequestById(planRequestId);
     if (!row) {
         return res.redirect('/coach/plan-requests');
     }
@@ -133,14 +136,18 @@ const showCoachPlanRequest = async (req, res) => {
 };
 
 const saveCoachPlanRequest = async (req, res) => {
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/coach/plan-requests');
+    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.error('Coach plan request validation:', errors.array());
-        return res.redirect(`/coach/plan-requests/${req.planRequestId}`);
+        return res.redirect(`/coach/plan-requests/${req.params.id}`);
     }
     const { workout_plan: workoutPlan, status } = req.body;
     const row = await updatePlanRequestInDb(
-        req.planRequestId,
+        planRequestId,
         userId(req),
         workoutPlan ?? '',
         status
@@ -148,7 +155,7 @@ const saveCoachPlanRequest = async (req, res) => {
     if (!row) {
         return res.redirect('/coach/plan-requests');
     }
-    return res.redirect(`/coach/plan-requests/${req.planRequestId}`);
+    return res.redirect(`/coach/plan-requests/${planRequestId}`);
 };
 
 // =======================
@@ -164,9 +171,13 @@ const listAdminPlanRequests = async (req, res) => {
 };
 
 const showAdminPlanRequest = async (req, res) => {
-    const row = await findPlanRequestById(req.planRequestId);
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/admin/plan-requests');
+    }
+    const row = await findPlanRequestById(planRequestId);
     if (!row) {
-        return res.redirect(planRequestsListPath(req));
+        return res.redirect('/admin/plan-requests');
     }
     res.render('planRequests/admin/detail', {
         title: row.name,
@@ -175,8 +186,12 @@ const showAdminPlanRequest = async (req, res) => {
 };
 
 const destroyAdminPlanRequest = async (req, res) => {
-    await deletePlanRequestByAdmin(req.planRequestId);
-    res.redirect(planRequestsListPath(req));
+    const planRequestId = parseInt(req.params.id);
+    if (Number.isNaN(planRequestId) || planRequestId < 1) {
+        return res.redirect('/admin/plan-requests');
+    }
+    await deletePlanRequestByAdmin(planRequestId);
+    res.redirect('/admin/plan-requests');
 };
 
 // =======================
@@ -186,17 +201,17 @@ const destroyAdminPlanRequest = async (req, res) => {
 router.get('/plan-requests', requireRole('trainee'), asyncHandler(listPlanRequests));
 router.get('/plan-requests/new', requireRole('trainee'), newPlanRequestForm);
 router.post('/plan-requests', requireRole('trainee'), planRequestBodyValidation, asyncHandler(createPlanRequest));
-router.get('/plan-requests/:id/edit', requireRole('trainee'), parseId, asyncHandler(editPlanRequestForm));
-router.get('/plan-requests/:id', requireRole('trainee'), parseId, asyncHandler(showPlanRequest));
-router.post('/plan-requests/:id/update', requireRole('trainee'), parseId, planRequestBodyValidation, asyncHandler(updateTraineePlanRequest));
-router.post('/plan-requests/:id/delete', requireRole('trainee'), parseId, asyncHandler(destroyPlanRequest));
+router.get('/plan-requests/:id/edit', requireRole('trainee'), asyncHandler(editPlanRequestForm));
+router.get('/plan-requests/:id', requireRole('trainee'), asyncHandler(showPlanRequest));
+router.post('/plan-requests/:id/update', requireRole('trainee'), planRequestBodyValidation, asyncHandler(updateTraineePlanRequest));
+router.post('/plan-requests/:id/delete', requireRole('trainee'), asyncHandler(destroyPlanRequest));
 
 router.get('/coach/plan-requests', requireRole('coach'), asyncHandler(listCoachPlanRequests));
-router.get('/coach/plan-requests/:id',requireRole('coach'), parseId, asyncHandler(showCoachPlanRequest));
-router.post('/coach/plan-requests/:id/update', requireRole('coach'), parseId, planRequestUpdateValidation, asyncHandler(saveCoachPlanRequest));
+router.get('/coach/plan-requests/:id', requireRole('coach'), asyncHandler(showCoachPlanRequest));
+router.post('/coach/plan-requests/:id/update', requireRole('coach'), planRequestUpdateValidation, asyncHandler(saveCoachPlanRequest));
 
 router.get('/admin/plan-requests', requireRole('admin'), asyncHandler(listAdminPlanRequests));
-router.get('/admin/plan-requests/:id', requireRole('admin'), parseId, asyncHandler(showAdminPlanRequest));
-router.post('/admin/plan-requests/:id/delete', requireRole('admin'), parseId, asyncHandler(destroyAdminPlanRequest));
+router.get('/admin/plan-requests/:id', requireRole('admin'), asyncHandler(showAdminPlanRequest));
+router.post('/admin/plan-requests/:id/delete', requireRole('admin'), asyncHandler(destroyAdminPlanRequest));
 
 export default router;

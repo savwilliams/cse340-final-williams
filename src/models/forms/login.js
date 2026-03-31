@@ -4,8 +4,8 @@ import db from '../db.js';
 /**
  * Find a user by email address for login verification.
  * 
- * @param {string} email - Email address to search for
- * @returns {Promise<Object|null>} User object with password hash or null if not found
+ * @param {string} email 
+ * @returns {Promise<Object|null>} 
  */
 const findUserByEmail = async (email) => {
     const query = `

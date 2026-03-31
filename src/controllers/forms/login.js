@@ -11,7 +11,6 @@ const router = Router();
  * Process login form submission.
  */
 const processLogin = async (req, res) => {
-    // Check for validation errors
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -19,30 +18,24 @@ const processLogin = async (req, res) => {
         return res.redirect('/login');
     }
 
-    // Extract email and password from req.body
     const { email, password } = req.body;
 
     try {
-        // Find user by email
         const user = await findUserByEmail(email);
         if (!user) {
             console.error('User not found');
             return res.redirect('/login');
         }
 
-        // Verify password 
         const isPasswordValid = await verifyPassword(password, user.password);
         if (!isPasswordValid) {
             console.error('Invalid password');
             return res.redirect('/login');
         }
         
-        // SECURITY: Remove password from user object before storing in session
         delete user.password;
 
-        // Store user in session
         req.session.user = user;
-        // Ensure the session is saved before redirecting
         return req.session.save((err) => {
             if (err) {
                 console.error('Error saving session:', err);
@@ -61,55 +54,34 @@ const processLogin = async (req, res) => {
 
 /**
  * Handle user logout.
- * 
- * NOTE: connect.sid is the default session cookie name since we did not
- * specify a custom name when creating the session in server.js.
  */
 const processLogout = (req, res) => {
-    // First, check if there is a session object on the request
     if (!req.session) {
-        // If no session exists, there's nothing to destroy,
-        // so we just redirect the user back to the home page
         return res.redirect('/');
     }
 
-    // Call destroy() to remove this session from the store (PostgreSQL in our case)
     req.session.destroy((err) => {
         if (err) {
-            // If something goes wrong while removing the session from the database:
             console.error('Error destroying session:', err);
 
-            /**
-             * Clear the session cookie from the browser anyway, so the client
-             * does not keep sending an invalid session ID.
-             */
             res.clearCookie('connect.sid');
 
-            /** 
-             * Normally we would respond with a 500 error since logout did not fully succeed.
-             * Example: return res.status(500).send('Error logging out');
-             * 
-             * Since this is a practice site, we will redirect to the home page anyway.
-             */
             return res.redirect('/');
         }
 
-        // If session destruction succeeded, clear the session cookie from the browser
         res.clearCookie('connect.sid');
 
-        // Redirect the user to the home page
         res.redirect('/');
     });
 };
 
 /**
- * Display protected dashboard (requires login).
+ * Display protected dashboard (requires login)
  */
 const showDashboard = (req, res) => {
     const user = req.session.user;
     const sessionData = req.session;
 
-    // Security check! Ensure user and sessionData do not contain password field
     if (user && user.password) {
         console.error('Security error: password found in user object');
         delete user.password;
@@ -135,12 +107,9 @@ const showLoginForm = (req, res) => {
     });
 }; 
 
-
-
 // Routes
 router.get('/', showLoginForm);
 router.post('/', loginValidation, processLogin);
 
-// Export router as default
 export default router;
 export { processLogout, showDashboard };

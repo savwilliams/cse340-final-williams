@@ -14,23 +14,20 @@ const cleanupExpiredSessions = async () => {
             console.log(`Cleaned up ${result.rowCount} expired sessions`);
         }
     } catch (error) {
-        // Check if the error is due to the session table not existing (PostgreSQL error code 42P01)
         if (error.code === '42P01') {
             console.log('Session table does not exist yet:\n→ It will be created when the first session is initialized.');
             return;
         }
 
-        // Log actual errors
         console.error('Error cleaning up sessions:', error);
     }
 };
 
 /**
- * Starts automatic session cleanup that runs every 12 hours.
- * Runs immediately on startup to handle any sessions that expired while server was offline.
+ * Starts automatic session cleanup
  */
 const startSessionCleanup = () => {
-    // Run cleanup immediately on startup (catches sessions that expired while offline)
+    // Run cleanup immediately on startup
     cleanupExpiredSessions();
 
     // Schedule cleanup to run every 12 hours

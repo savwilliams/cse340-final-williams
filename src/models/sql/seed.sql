@@ -1,6 +1,3 @@
--- Database seed file for Workout Tracker 
--- This file creates tables and inserts all initial data
-
 BEGIN;
 
 --======== Create Tables ========

@@ -35,7 +35,6 @@ const addLocalVariables = (req, res, next) => {
     // Set greeting based on time of day
     res.locals.greeting = `<p>${getCurrentGreeting()}</p>`;
 
-    // Convenience variable for UI state based on session state
     res.locals.isLoggedIn = false;
     res.locals.dashboardPath = null;
     res.locals.planRequestsPath = null;
@@ -59,8 +58,6 @@ const addLocalVariables = (req, res, next) => {
             res.locals.manageExercisesPath = '/admin/exercises';
         }
     }
-
-    // Continue to the next middleware or route handler
     next();
 };
 
