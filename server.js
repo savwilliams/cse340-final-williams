@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { testConnection } from './src/models/setup.js';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
-import { caCert } from './src/models/db.js';
+import { pool as dbPool } from './src/models/db.js';
 import { startSessionCleanup } from './src/utils/session-cleanup.js';
 // Import MVC components
 import routes from './src/controllers/routes.js';
@@ -36,14 +36,7 @@ const pgSession = connectPgSimple(session);
 // Configure session middleware
 app.use(session({
     store: new pgSession({
-        conObject: {
-            connectionString: process.env.DB_URL,
-            ssl: {
-                ca: caCert,
-                rejectUnauthorized: true,
-                checkServerIdentity: () => { return undefined; }
-            }
-        },
+        pool: dbPool,
         tableName: 'session',
         createTableIfMissing: true
     }),

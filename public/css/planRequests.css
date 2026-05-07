@@ -104,6 +104,11 @@
   margin-top: 1.25rem;
 }
 
+.plan-requests-form {
+  display: grid;
+  gap: 1rem;
+}
+
 .plan-requests-footer-actions {
   margin-top: 1.5rem;
   justify-content: flex-start;
@@ -120,6 +125,18 @@
 .plan-requests-status-badge {
   font-weight: 800;
   text-transform: capitalize;
+}
+
+.status-submitted {
+  color: var(--accent-secondary, #FBAE6B);
+}
+
+.status-in_progress {
+  color: var(--accent-pink, #E8BECD);
+}
+
+.status-completed {
+  color: #9adf9a;
 }
 
 .plan-requests-body-block {

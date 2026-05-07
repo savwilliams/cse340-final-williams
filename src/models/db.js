@@ -9,11 +9,19 @@ const __dirname = path.dirname(__filename);
 // Read the CA certificate content
 const caCert = fs.readFileSync(path.join(__dirname, '..','..','bin', 'byuicse-psql-cert.pem'));
 
+const toPositiveInt = (value, fallback) => {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+};
+
 /**
  * Connection pool for PostgreSQL database.
  */
 const pool = new Pool({
     connectionString: process.env.DB_URL,
+    max: toPositiveInt(process.env.DB_POOL_MAX, 5),
+    idleTimeoutMillis: toPositiveInt(process.env.DB_POOL_IDLE_MS, 30000),
+    connectionTimeoutMillis: toPositiveInt(process.env.DB_POOL_CONNECT_TIMEOUT_MS, 10000),
     ssl: {
         ca: caCert,  
         rejectUnauthorized: true, 
@@ -63,4 +71,4 @@ if (process.env.NODE_ENV?.toLowerCase().includes('dev') && process.env.ENABLE_SQ
 }
 
 export default db;
-export { caCert };
+export { caCert, pool };

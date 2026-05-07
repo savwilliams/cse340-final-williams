@@ -82,6 +82,23 @@
 .dashboard-actions {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dashboard-link-secondary {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-white);
+  border: 1px solid rgba(119, 126, 139, 0.75);
+  background: rgba(18, 25, 36, 0.35);
+}
+
+.dashboard-link-secondary:hover {
+  border-color: rgba(232, 190, 205, 0.45);
 }
 
 .dashboard-logout {
